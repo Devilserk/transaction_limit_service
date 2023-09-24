@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: createKeyspace
+      author: myname
+      changes:
+        - sql:
+            dbms: cassandra
+            endDelimiter: ;
+            splitStatements: true
+            sql: "CREATE KEYSPACE IF NOT EXISTS spring_cassandra WITH REPLICATION = {'class':'SimpleStrategy', 'replication_factor':'1'} AND DURABLE_WRITES = true"
+  - include:
+      file: db/changelog/changeset/service_V000__initial.sql

@@ -1,0 +1,52 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: user
+    password: password
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  cassandra:
+    schema-action: CREATE_IF_NOT_EXISTS
+    request:
+      timeout: 10s
+    connection:
+      connect-timeout: 10s
+      init-query-timeout: 10s
+    local-datacenter: datacenter1
+    keyspace-name: spring_cassandra
+
+  astra:
+    client-id: <CLIENT_ID>
+    client-secret: <CLIENT_SECRET>
+    application-token: <APP_TOKEN>
+    cloud-region: <DB_REGION>
+    database-id: <DB_ID>
+    keyspace: spring_cassandra
+
+server:
+  port: 8082
+
+logging:
+  level:
+    root: info
+
+twelvedata:
+  api:
+    url:
+      base: https://api.twelvedata.com/
+      daily-currency-close: time_series?symbol=%s&interval=1day&outputsize=1&dp=2&apikey=d063692b1d444d32bfa28e7a3b08209c
+
+
+springfox.documentation.swagger.v2.path: /api-docs
