@@ -7,6 +7,12 @@ plugins {
 group = "org.example"
 version = "1.0"
 
+configurations {
+    compileOnly {
+        extendsFrom(configurations.annotationProcessor.get())
+    }
+}
+
 repositories {
     mavenCentral()
 }
