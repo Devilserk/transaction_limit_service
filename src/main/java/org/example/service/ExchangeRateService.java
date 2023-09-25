@@ -76,7 +76,7 @@ public class ExchangeRateService {
             return transaction.getSum();
         }
 
-        String currencyPair = USD_CURRENCY_CODE + transaction.getCurrencyShortname().getCurrencyCode();
+        String currencyPair = USD_CURRENCY_CODE + "/" + transaction.getCurrencyShortname().getCurrencyCode();
         return transaction.getSum().multiply(getExchangeRate(currencyPair).getCloseRate());
     }
 

@@ -25,6 +25,7 @@ public class LimitService {
     private final LimitMapper limitMapper;
     private final ExchangeRateService exchangeRateService;
     private static final String USD_CURRENCY_CODE = "USD";
+    private static final BigDecimal DEFAULT_LIMIT_SUM = BigDecimal.valueOf(1000.00);
 
     @Transactional
     public ResponseLimitDto createLimit(CreateLimitDto createLimitDto) {
@@ -64,7 +65,8 @@ public class LimitService {
         Limit defaultLimit = Limit.builder()
                 .accountNumber(transaction.getAccountFrom())
                 .expenseCategory(transaction.getExpenseCategory())
-                .limitSum(BigDecimal.valueOf(1000.00))
+                .limitSum(DEFAULT_LIMIT_SUM)
+                .remainder(DEFAULT_LIMIT_SUM)
                 .limitCurrencyShortname(Currency.getInstance(USD_CURRENCY_CODE))
                 .limitDatetime(ZonedDateTime.now())
                 .limitExceeded(false)
