@@ -22,7 +22,7 @@ RESTful приложение. Сервис прототип микросерви
 
 * Liquibase сам накатывает нужные миграции на голый PostgreSql при старте приложения
 * В тестах используется [testcontainers](https://testcontainers.com/), в котором тоже запускается отдельный инстанс
-  postgres
+  postgres и cassandra
 * В коде продемонстрирована работа с JPA (Hibernate)
 
 # Как запустить локально?
@@ -62,8 +62,8 @@ java -jar build/libs/service.jar
 # Код
 
 * Обычная трёхслойная
-  архитектура – Controller, Service, Repository
-* Слой Repository реализован на JPA (Hibernate)
+  архитектура – [Controller](src/main/java/org/example/controller), [Service](src/main/java/org/example/service), [Repository](src/main/java/org/example/repository)
+* Слой Repository реализован и на jdbcTemplate, и на JPA (Hibernate)
 
 ## Actions
 ### Transaction
@@ -80,6 +80,7 @@ java -jar build/libs/service.jar
     /api/v1/limits                             POST               Create a new limit
 
 # Тесты
+[Перейти к тестам](src/test/java/org/example)
 
 * SpringBootTest
 * MockMvc
