@@ -1,6 +1,5 @@
 package org.example.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.dto.transaction.ReceiveTransactionDto;
@@ -21,7 +20,6 @@ public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final TransactionMapper transactionMapper;
     private final LimitService limitService;
-    private final ObjectMapper objectMapper;
 
     @Transactional
     public ResponseTransactionDto receiveTransaction(ReceiveTransactionDto receiveTransactionDto) {
@@ -41,7 +39,6 @@ public class TransactionService {
 
     @Transactional(readOnly = true)
     public List<ResponseTransactionDto> getTransactionsLimitExceeded(Long accountNumber) {
-        List<ResponseTransactionDto> responseTransactionDtos = transactionRepository.findTransactionsExceedingLimits(accountNumber);
-        return responseTransactionDtos;
+        return transactionRepository.findTransactionsExceedingLimits(accountNumber);
     }
 }

@@ -46,19 +46,14 @@ class TransactionControllerTest {
     private PostgreSQLContainer<?> postgreSQLContainer;
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private TransactionService transactionService;
-
     @Autowired
     private TransactionRepository transactionRepository;
-
     @Autowired
     private LimitRepository limitRepository;
-
     @Autowired
     private ObjectMapper objectMapper;
-
     private int expectedLength;
     private Long expectedAccountFrom;
     private Long expectedAccountTo;

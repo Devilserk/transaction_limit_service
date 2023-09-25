@@ -33,7 +33,7 @@ public class LimitService {
         limit.setRemainder(limit.getLimitSum());
         limit.setLimitDatetime(ZonedDateTime.now());
         limit.setLimitExceeded(false);
-        limit.setLimitCurrencyShortname(Currency.getInstance("USD"));
+        limit.setLimitCurrencyShortname(Currency.getInstance(USD_CURRENCY_CODE));
         limitRepository.save(limit);
         log.info("Created limit: {}", limit);
         return limitMapper.toResponseDto(limit);

@@ -29,7 +29,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ExchangeRateServiceTest {
     @Autowired
     private ExchangeRateService exchangeRateService;
-
     @Autowired
     private CassandraContainer<?> cassandraContainer;
     @Autowired

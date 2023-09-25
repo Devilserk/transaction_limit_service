@@ -27,13 +27,10 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Transactional
 @ContextConfiguration(classes = PostgreSQLTestContainerConfig.class)
 public class LimitServiceTest {
-
     @Autowired
     private PostgreSQLContainer<?> postgreSQLContainer;
-
     @Autowired
     private LimitService limitService;
-
     @Autowired
     private LimitRepository limitRepository;
 

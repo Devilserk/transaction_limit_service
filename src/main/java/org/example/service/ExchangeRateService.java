@@ -72,7 +72,7 @@ public class ExchangeRateService {
     }
 
     public BigDecimal convertTransactionSumToUSD(Transaction transaction) {
-        if (transaction.getCurrencyShortname().getCurrencyCode().equals("USD")) {
+        if (transaction.getCurrencyShortname().getCurrencyCode().equals(USD_CURRENCY_CODE)) {
             return transaction.getSum();
         }
 
