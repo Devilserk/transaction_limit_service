@@ -1,4 +1,4 @@
-# Transactional Limit Service
+# Transactions Limit Service
 
 RESTful приложение. Сервис прототип микросервиса, который будет интегрирован в существующую банковскую систему.
 
