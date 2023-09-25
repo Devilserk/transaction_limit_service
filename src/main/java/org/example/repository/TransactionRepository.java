@@ -26,10 +26,10 @@ public class TransactionRepository {
                 t.currency_shortname as currencyShortname,
                 t.sum as sum,
                 t.expense_category as expenseCategory,
-                CAST(t.datetime AT TIME ZONE 'UTC' AS timestamp with time zone) AS datetime,
-                l.limit_sum  AS limitSum,
-                CAST(l.limit_datetime AT TIME ZONE 'UTC' AS timestamp with time zone) AS limitDatetime,
-                l.limit_currency_shortname  AS limitCurrencyShortname
+                t.datetime AS datetime,
+                l.limit_sum AS limitSum,
+                l.limit_datetime AS limitDatetime,
+                l.limit_currency_shortname AS limitCurrencyShortname
                 FROM transactions t
                 INNER JOIN limits l ON t.account_from  = l.account_number
                 AND (SELECT l2.limit_datetime FROM limits l2

@@ -105,7 +105,6 @@ class TransactionControllerTest {
                 .andExpect(jsonPath("$.length()").value(expectedLength));
     }
 
-
     private ReceiveTransactionDto createReceiveTransactionDto() {
         return ReceiveTransactionDto.builder()
                 .accountFrom(1234567890L)
