@@ -5,7 +5,7 @@ import org.example.enums.ExpenseCategory;
 import org.example.model.Limit;
 import org.example.model.Transaction;
 import org.example.repository.LimitRepository;
-import org.example.testconfig.TestContainerConfig;
+import org.example.testconfig.PostgreSQLTestContainerConfig;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,7 +23,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 @Testcontainers
-@ContextConfiguration(classes = TestContainerConfig.class)
+@ContextConfiguration(classes = PostgreSQLTestContainerConfig.class)
 public class LimitServiceTest {
 
     @Autowired

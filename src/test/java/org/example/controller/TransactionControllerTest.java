@@ -12,7 +12,7 @@ import org.example.repository.LimitRepository;
 import org.example.repository.TransactionRepository;
 import org.example.service.LimitService;
 import org.example.service.TransactionService;
-import org.example.testconfig.TestContainerConfig;
+import org.example.testconfig.PostgreSQLTestContainerConfig;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @Testcontainers
-@ContextConfiguration(classes = TestContainerConfig.class)
+@ContextConfiguration(classes = PostgreSQLTestContainerConfig.class)
 class TransactionControllerTest {
     @Autowired
     private PostgreSQLContainer<?> postgreSQLContainer;

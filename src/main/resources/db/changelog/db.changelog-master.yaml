@@ -1,3 +1,22 @@
 databaseChangeLog:
   - include:
       file: db/changelog/changeset/service_V000__initial.sql
+
+  - changeSet:
+      id: 1
+      author: yourname
+      changes:
+        - createTable:
+            tableName: exchange_rates
+            columns:
+              - column:
+                  name: currencypair
+                  type: text
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: closeRate
+                  type: decimal
+              - column:
+                  name: date
+                  type: date

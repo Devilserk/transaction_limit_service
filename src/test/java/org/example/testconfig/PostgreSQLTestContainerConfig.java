@@ -6,7 +6,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
 @TestConfiguration
-public class TestContainerConfig {
+public class PostgreSQLTestContainerConfig {
 
     @Bean
     public static PostgreSQLContainer<?> postgreSQLContainer() {

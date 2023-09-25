@@ -12,16 +12,13 @@ import org.example.repository.ExchangeRateRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -32,7 +29,6 @@ public class ExchangeRateService {
     private String baseUrl;
     @Value("${twelvedata.api.url.daily-currency-close}")
     private String dailyCurrencyUrl;
-
     private final ExchangeRateRepository exchangeRateRepository;
     private final ObjectMapper objectMapper;
     private List<String> currencyPairs;
@@ -69,11 +65,15 @@ public class ExchangeRateService {
 
             if (exchangeRate.getCloseRate() != null) {
                 log.info("Saved exchange rate: {}", exchangeRate);
+                exchangeRateRepository.save(exchangeRate);
             }
         }
     }
 
     public BigDecimal convertTransactionSumToUSD(Transaction transaction) {
+        if (transaction.getCurrencyShortname().getCurrencyCode().equals("USD")) {
+            return transaction.getSum();
+        }
         String currencyPair = "USD/" + transaction.getCurrencyShortname().getCurrencyCode();
         return transaction.getSum().multiply(getExchangeRate(currencyPair).getCloseRate());
     }
@@ -83,7 +83,7 @@ public class ExchangeRateService {
                 .orElseThrow(() -> new IllegalArgumentException("Currency pair not found: " + currencyPair));
     }
 
-    @Scheduled(cron = "0 0 1 * * ?")
+    @Scheduled(cron = "${exchange_rate.cron}")
     public void scheduledUpdate() {
         updateExchangeRates();
     }

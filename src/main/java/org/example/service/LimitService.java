@@ -45,11 +45,8 @@ public class LimitService {
         }
 
         BigDecimal transactionSum;
-        if (!transaction.getCurrencyShortname().getCurrencyCode().equals("USD")) {
-            transactionSum = exchangeRateService.convertTransactionSumToUSD(transaction);
-        } else {
-            transactionSum = transaction.getSum();
-        }
+
+        transactionSum = exchangeRateService.convertTransactionSumToUSD(transaction);
 
         if (transactionSum.compareTo(limit.getRemainder()) > 0) {
             limit.setLimitExceeded(true);
