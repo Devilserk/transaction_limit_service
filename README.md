@@ -11,7 +11,7 @@ Limit - клиентский, для внешних запросов от кли
 
 * [Spring Boot](https://spring.io/projects/spring-boot) – как основной фрэймворк
 * [PostgreSQL](https://www.postgresql.org/) – как основная реляционная база данных
-* [Сassandra]([https://redis.io/](https://cassandra.apache.org/_/index.html)) – как NO SQL база данных для хранения данных о курсе.
+* [Сassandra](https://cassandra.apache.org/_/index.html) – как NO SQL база данных для хранения данных о курсе.
 * [testcontainers](https://testcontainers.com/) – для изолированного тестирования с базой данных
 * [Liquibase](https://www.liquibase.org/) – для ведения миграций схемы БД
 * [Gradle](https://gradle.org/) – как система сборки приложения
