@@ -18,12 +18,10 @@ Limit - клиентский, для внешних запросов от кли
 
 # База данных
 
-* База поднимается в отдельном сервисе [infra](../infra)
-* Redis поднимается в единственном инстансе тоже в [infra](../infra)
 * Liquibase сам накатывает нужные миграции на голый PostgreSql при старте приложения
 * В тестах используется [testcontainers](https://testcontainers.com/), в котором тоже запускается отдельный инстанс
   postgres
-* В коде продемонстрирована работа как с JPA (Hibernate)
+* В коде продемонстрирована работа с JPA (Hibernate)
 
 # Как запустить локально?
 
@@ -54,7 +52,7 @@ gradle build
 Запустить jar'ник
 
 ```shell
-java -jar build/libs/ServiceTemplate-1.0.jar
+java -jar build/libs/service.jar
 ```
 
 Но легче всё это делать через IDE
@@ -68,15 +66,15 @@ java -jar build/libs/ServiceTemplate-1.0.jar
 ## Actions
 ### Transaction
 
-    URL                                        HTTP Method        Operation
+    URL                                           HTTP Method        Operation
     
-    /api/v1/transactions/{accountNumber}       GET                Get all transactions by account number
-    //api/v1/transactions                      POST               Recieve transaction
+    /api/v1/transactions/{accountNumber}/exceeded GET                Get all transactions by account number
+    /api/v1/transactions                          POST               Recieve transaction
     
 ### Limit
     URL                                        HTTP Method        Operation
 
-    /api/v1/limits/{accountNumber}             GET                Get all limits by account number
+    /api/v1/limits/{accountNumber}/all         GET                Get all limits by account number
     /api/v1/limits                             POST               Create a new limit
 
 # Тесты
