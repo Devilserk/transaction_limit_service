@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.Currency;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,7 @@ public class LimitService {
     private final LimitRepository limitRepository;
     private final LimitMapper limitMapper;
     private final ExchangeRateService exchangeRateService;
+    private static final String USD_CURRENCY_CODE = "USD";
 
     @Transactional
     public ResponseLimitDto createLimit(CreateLimitDto createLimitDto) {
@@ -38,16 +40,11 @@ public class LimitService {
 
     @Transactional
     public Limit handleTransactionAndReturnLimit(Transaction transaction) {
-        Limit limit = getActualLimitByAccountNumber(transaction.getAccountFrom());
-
-        if (limit == null) {
-            limit = createDefaultLimit(transaction);
-        }
+        Limit limit = getActualLimitByAccountNumber(transaction.getAccountFrom())
+                .orElseGet(() -> createDefaultLimit(transaction));
 
         BigDecimal transactionSum;
-
         transactionSum = exchangeRateService.convertTransactionSumToUSD(transaction);
-
         if (transactionSum.compareTo(limit.getRemainder()) > 0) {
             limit.setLimitExceeded(true);
         }
@@ -58,9 +55,8 @@ public class LimitService {
     }
 
     @Transactional(readOnly = true)
-    public Limit getActualLimitByAccountNumber(Long accountNumber) {
-        return limitRepository.findTopByAccountNumberOrderByLimitDatetimeDesc(accountNumber)
-                .orElse(null);
+    public Optional<Limit> getActualLimitByAccountNumber(Long accountNumber) {
+        return limitRepository.findTopByAccountNumberOrderByLimitDatetimeDesc(accountNumber);
     }
 
     @Transactional
@@ -69,7 +65,7 @@ public class LimitService {
                 .accountNumber(transaction.getAccountFrom())
                 .expenseCategory(transaction.getExpenseCategory())
                 .limitSum(BigDecimal.valueOf(1000.00))
-                .limitCurrencyShortname(Currency.getInstance("USD"))
+                .limitCurrencyShortname(Currency.getInstance(USD_CURRENCY_CODE))
                 .limitDatetime(ZonedDateTime.now())
                 .limitExceeded(false)
                 .build();

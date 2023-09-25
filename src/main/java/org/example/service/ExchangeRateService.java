@@ -32,6 +32,7 @@ public class ExchangeRateService {
     private final ExchangeRateRepository exchangeRateRepository;
     private final ObjectMapper objectMapper;
     private List<String> currencyPairs;
+    private static final String USD_CURRENCY_CODE = "USD";
 
     public void updateExchangeRates() {
         WebClient webClient = WebClient.builder()
@@ -74,7 +75,8 @@ public class ExchangeRateService {
         if (transaction.getCurrencyShortname().getCurrencyCode().equals("USD")) {
             return transaction.getSum();
         }
-        String currencyPair = "USD/" + transaction.getCurrencyShortname().getCurrencyCode();
+
+        String currencyPair = USD_CURRENCY_CODE + transaction.getCurrencyShortname().getCurrencyCode();
         return transaction.getSum().multiply(getExchangeRate(currencyPair).getCloseRate());
     }
 
