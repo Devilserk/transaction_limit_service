@@ -59,6 +59,10 @@ java -jar build/libs/service.jar
 
 Но легче всё это делать через IDE
 
+PORT: 8080
+
+## Swagger-UI: http://localhost:8080/swagger-ui/index.html
+
 # Код
 
 * Обычная трёхслойная
