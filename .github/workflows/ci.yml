@@ -43,6 +43,9 @@ jobs:
           java-version: 17
           distribution: 'adopt'
 
+      - name: Create Cassandra Keyspace
+        run: docker exec -it cassandra cqlsh -e "CREATE KEYSPACE IF NOT EXISTS my_keyspace WITH replication = {'class':'SimpleStrategy', 'replication_factor':1};"
+
       - name: Make gradlew executable
         run: chmod +x gradlew
 
