@@ -28,7 +28,7 @@ public class LimitController {
         return limitService.createLimit(createLimitDto);
     }
 
-    @GetMapping("/{accountNumber}")
+    @GetMapping("/{accountNumber}/all")
     public List<ResponseLimitDto> getLimitsByAccount(@PathVariable Long accountNumber) {
         return limitService.getLimitsByAccount(accountNumber);
     }

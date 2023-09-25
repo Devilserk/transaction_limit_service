@@ -28,7 +28,7 @@ public class TransactionController {
         return transactionService.receiveTransaction(receiveTransactionDto);
     }
 
-    @GetMapping("/{accountNumber}")
+    @GetMapping("/{accountNumber}/exceeded")
     public List<ResponseTransactionDto> getTransactionsLimitExceeded(@PathVariable Long accountNumber) {
         return transactionService.getTransactionsLimitExceeded(accountNumber);
     }

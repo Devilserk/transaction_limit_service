@@ -36,7 +36,7 @@ spring:
     keyspace: spring_cassandra
 
 server:
-  port: 8082
+  port: 8080
 
 logging:
   level:
